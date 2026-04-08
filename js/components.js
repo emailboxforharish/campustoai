@@ -233,7 +233,10 @@
     }
   }
 
-  // Run after DOM is ready
+  // Run after DOM is ready — guard against double-execution
+  if (window.__campusNavLoaded) return;
+  window.__campusNavLoaded = true;
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', inject);
   } else {
