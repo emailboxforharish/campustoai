@@ -128,6 +128,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="courses.html">Courses</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="placement.html">Placement</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="enroll.html" class="btn btn-primary btn-sm nav-cta">Enroll Now →</a></li>
@@ -157,6 +158,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="courses.html">Courses</a></li>
           <li><a href="about.html">About Us</a></li>
+          <li><a href="placement.html">Placement</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="enroll.html">Enroll Now</a></li>
