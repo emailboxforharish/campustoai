@@ -184,6 +184,7 @@ p  { color: #374151; }
 .nav-logo {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .nav-logo-svg {
@@ -193,8 +194,29 @@ p  { color: #374151; }
   flex-shrink: 0;
 }
 
+.nav-slogan {
+  position: absolute;
+  left: 52px;
+  bottom: 4px;
+  font-size: 9.5px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--yellow);
+  letter-spacing: 0.4px;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 @media (max-width: 860px) {
-  .logo-slogan { display: none; }
+  .nav-slogan {
+    font-size: 8px;
+    left: 43px;
+    bottom: 3px;
+  }
+  .nav-logo-svg {
+    height: 40px;
+  }
 }
 
 .nav-logo span { color: var(--yellow); }
