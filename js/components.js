@@ -18,7 +18,7 @@
      when both nav and footer appear on same page.
   ───────────────────────────────────────────── */
   function logoSVG(prefix) {
-    return `<svg class="nav-logo-svg" viewBox="0 0 218 58" xmlns="http://www.w3.org/2000/svg" aria-label="CampusToAI Academy">
+    return `<svg class="nav-logo-svg" viewBox="0 0 270 58" xmlns="http://www.w3.org/2000/svg" aria-label="CampusToAI Academy">
       <defs>
         <radialGradient id="${prefix}hexFill" cx="38%" cy="32%" r="72%">
           <stop offset="0%"   stop-color="#1a4fd8"/>
@@ -98,10 +98,10 @@
       <text x="180" y="31" font-family="Arial,sans-serif" font-size="22" font-weight="800" fill="#f0c040"  letter-spacing="-0.3">AI</text>
 
       <!-- Shimmer underline -->
-      <rect x="63" y="34" width="130" height="1.6" rx="1" fill="url(#${prefix}shimmer)"/>
-      <!-- Slogan (replaces ACADEMY) -->
-      <text x="63" y="48" font-family="Arial,sans-serif" font-size="9.5" font-style="italic">
-        <tspan fill="#c8dfff" letter-spacing="0.4" opacity="0.9">From Graduate to </tspan><tspan fill="#f0c040" font-weight="700" letter-spacing="0.3">AI-Ready.</tspan>
+      <rect x="63" y="34" width="150" height="1.6" rx="1" fill="url(#${prefix}shimmer)" class="logo-slogan"/>
+      <!-- Slogan -->
+      <text x="63" y="46" font-family="Arial,sans-serif" font-size="8.5" font-style="italic" class="logo-slogan">
+        <tspan fill="#c8dfff" letter-spacing="0.3" opacity="0.9">Fresh Graduate </tspan><tspan fill="#f0c040" font-weight="700">→</tspan><tspan fill="#f0c040" font-weight="700" letter-spacing="0.2"> Industry-Ready Professional</tspan>
       </text>
     </svg>`;
   }
@@ -150,7 +150,7 @@
         <a href="index.html" class="nav-logo">
           ${logoSVG('ftr_')}
         </a>
-        <p style="color:#a8c4ff;">From Graduate to AI-Ready.<br>The fastest path from fresh graduate to industry-ready Full-Stack Java + Cloud + AI Developer.</p>
+        <p style="color:#a8c4ff;">Fresh Graduate → Industry-Ready Professional.<br>The fastest path from college to a job-ready Full-Stack Java + Cloud + AI Developer.</p>
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
@@ -177,7 +177,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 CampusToAI Academy. All rights reserved.</span>
-      <span>From Graduate to AI-Ready.</span>
+      <span>Fresh Graduate → Industry-Ready Professional.</span>
     </div>
   </div>
 </footer>`;
