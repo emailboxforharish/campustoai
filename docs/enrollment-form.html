@@ -1,1 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Enrollment Form — CampusToAI Academy</title>
+  <style>
+    /* ── A4 page setup ── */
+    @page {
+      size: A4 portrait;
+      margin: 15mm 18mm 18mm 18mm;
+    }
 
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Base ── */
+    html { font-size: 11.5px; }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      color: #111;
+      background: #e8e8e8;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Screen: show page as A4 card ── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      padding: 14mm 16mm 16mm;
+      background: #fff;
+      box-shadow: 0 4px 32px rgba(0,0,0,.18);
+    }
+
+    /* ── Print: full bleed, no shadow, A4 margins come from @page ── */
+    @media print {
+      body { background: #fff; }
+      .page {
+        width: 100%;
+        min-height: unset;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+      .page-break { page-break-before: always; break-before: page; }
+      .no-break   { page-break-inside: avoid; break-inside: avoid; }
+
+      /* keep section headings with their content */
+      .section-title { page-break-after: avoid; break-after: avoid; }
+
+      /* force background colours to print */
+      .section-title,
+      .terms-table th,
+      .doc-title-row,
+      .student-box,
+      .alert-box,
+      .info-box,
+      .declaration {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ── Header / Letterhead ── */
+    .letterhead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0d1b5e;
+      border-radius: 6px 6px 0 0;
+      padding: 12px 16px;
+      margin-bottom: 4px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .lh-brand {
+      display: flex;
+      align-items: center;
+    }
+    .lh-contact {
+      text-align: right;
+      font-size: 9px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.7;
+    }
+    .lh-contact strong { color: #f0c040; }
+
+    .doc-title-row {
+      text-align: center;
+      margin: 10px 0 8px;
+      border: 2px solid #0d1b5e;
+      border-radius: 4px;
+      padding: 6px 0;
+      background: #f4f6fb;
+    }
+    .doc-title-row h2 {
+      font-family: Arial, sans-serif;
+      font-size: 12.5px;
+      color: #0d1b5e;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .doc-title-row p {
+      font-size: 9px;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    /* ── Student Details Box ── */
+    .student-box {
+      border: 1.5px solid #0d1b5e;
+      border-radius: 4px;
+      padding: 9px 12px;
+      margin-bottom: 10px;
+      background: #fafbff;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .student-box h3 {
+      font-family: Arial, sans-serif;
+      font-size: 9.5px;
+      color: #0d1b5e;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #dde3f0;
+      padding-bottom: 4px;
+    }
+    .student-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px 20px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .field label {
+      font-size: 8.5px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-family: Arial, sans-serif;
+    }
+    .field-line {
+      border-bottom: 1px solid #333;
+      min-height: 15px;
+      width: 100%;
+    }
+    .field-full { grid-column: 1 / -1; }
+
+    /* ── Intro paragraph ── */
+    .intro {
+      font-size: 10.5px;
+      color: #222;
+      margin-bottom: 10px;
+      line-height: 1.65;
+      text-align: justify;
+    }
+    .intro strong { color: #0d1b5e; }
+
+    /* ── Section headings ── */
+    .section-title {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      background: #0d1b5e;
+      padding: 4px 9px;
+      margin: 12px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border-radius: 2px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    /* ── Clauses ── */
+    .clause {
+      margin-bottom: 5px;
+      font-size: 10.5px;
+      color: #222;
+      line-height: 1.6;
+      text-align: justify;
+      padding-left: 22px;
+      position: relative;
+    }
+    .clause .clause-num {
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #0d1b5e;
+    }
+
+    /* ── Alert / highlight boxes ── */
+    .alert-box {
+      border-left: 4px solid #c49a00;
+      background: #fffbea;
+      padding: 6px 10px;
+      margin: 7px 0;
+      font-size: 10px;
+      color: #333;
+      line-height: 1.55;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .alert-box strong { color: #7a5c00; }
+
+    .info-box {
+      border-left: 4px solid #0d1b5e;
+      background: #f4f6fb;
+      padding: 6px 10px;
+      margin: 7px 0;
+      font-size: 10px;
+      color: #333;
+      line-height: 1.55;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* ── Table ── */
+    .terms-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 7px 0;
+      font-size: 10px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .terms-table th {
+      background: #0d1b5e;
+      color: #fff;
+      padding: 5px 8px;
+      text-align: left;
+      font-family: Arial, sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .terms-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #dde3f0;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+    .terms-table tr:nth-child(even) td { background: #f8faff; }
+    .terms-table tr:last-child td { border-bottom: none; }
+    .td-no { color: #c00; font-weight: 700; }
+    .td-yes { color: #006a2e; font-weight: 700; }
+
+    /* ── Signature section ── */
+    .sig-section {
+      margin-top: 16px;
+      border-top: 2px solid #0d1b5e;
+      padding-top: 12px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .sig-title {
+      font-family: Arial, sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0d1b5e;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .sig-block { display: flex; flex-direction: column; gap: 6px; }
+    .sig-block label {
+      font-size: 8.5px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-family: Arial, sans-serif;
+    }
+    .sig-line {
+      border-bottom: 1px solid #333;
+      min-height: 30px;
+    }
+    .sig-block p {
+      font-size: 8.5px;
+      color: #444;
+      margin-top: 1px;
+    }
+
+    /* ── Declaration ── */
+    .declaration {
+      background: #f4f6fb;
+      border: 1.5px solid #0d1b5e;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 12px 0;
+      font-size: 10.5px;
+      line-height: 1.65;
+      color: #222;
+      text-align: justify;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .declaration strong { color: #0d1b5e; }
+
+    /* ── Footer ── */
+    .doc-footer {
+      margin-top: 14px;
+      border-top: 1px solid #dde3f0;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5px;
+      color: #888;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ── Checkbox list ── */
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin: 6px 0;
+      padding-left: 12px;
+    }
+    .check-list li {
+      font-size: 10.5px;
+      color: #222;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+    .check-list li::before {
+      content: '□';
+      font-size: 11px;
+      color: #0d1b5e;
+      flex-shrink: 0;
+      margin-top: 0px;
+    }
+
+    /* ── Sub-list ── */
+    .sub-list {
+      list-style: none;
+      padding-left: 18px;
+      margin: 4px 0;
+    }
+    .sub-list li {
+      font-size: 10px;
+      color: #333;
+      line-height: 1.55;
+      position: relative;
+      padding-left: 12px;
+    }
+    .sub-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #888;
+    }
+
+    .watermark-draft {
+      display: none;
+    }
+
+    /* ── PDF Logo (flat, no filter effects for html2canvas compatibility) ── */
+    .pdf-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pdf-hex {
+      flex-shrink: 0;
+    }
+    .pdf-wordmark {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .pdf-wm-text {
+      line-height: 1.1;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Top bar (hidden when printing) ── -->
+<div class="print-bar no-print">
+  <button onclick="window.print()" class="print-btn">
+    🖨 Print / Save as PDF
+  </button>
+</div>
+
+<style>
+  .print-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #0d1b5e;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    z-index: 999;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .print-bar p {
+    color: rgba(255,255,255,.6);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    margin: 0;
+  }
+  .print-btn {
+    background: #f0c040;
+    color: #0d1b5e;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    letter-spacing: .3px;
+    transition: background .2s;
+  }
+  .print-btn:hover { background: #d4a800; }
+  @media print {
+    .no-print { display: none !important; }
+    body { background: #fff !important; padding-top: 0 !important; }
+    .page { margin: 0 !important; box-shadow: none !important; width: 100% !important; }
+  }
+  body { padding-top: 52px; }
+</style>
+
+<script>
+  // Auto-trigger print if ?download in URL
+  if (window.location.search.includes('download')) {
+    window.addEventListener('load', function() {
+      setTimeout(function() { window.print(); }, 400);
+    });
+  }
+</script>
+
+<div class="page" id="enrollDoc">
+
+  <!-- ═══════════════════════════════════════
+       LETTERHEAD
+  ═══════════════════════════════════════ -->
+  <div class="letterhead">
+    <div class="lh-brand">
+      <div class="pdf-logo">
+        <div class="pdf-hex">
+          <svg viewBox="0 0 48 48" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="44,24 34,7 14,7 4,24 14,41 34,41" fill="#1a4fd8"/>
+            <polygon points="44,24 34,7 14,7 4,24 14,41 34,41" fill="none" stroke="#f0c040" stroke-width="1.5"/>
+            <line x1="12" y1="18" x2="24" y2="13" stroke="#90b8ff" stroke-width="1"/>
+            <line x1="12" y1="18" x2="24" y2="24" stroke="#90b8ff" stroke-width="1"/>
+            <line x1="12" y1="30" x2="24" y2="24" stroke="#90b8ff" stroke-width="1"/>
+            <line x1="12" y1="30" x2="24" y2="35" stroke="#90b8ff" stroke-width="1"/>
+            <line x1="24" y1="13" x2="36" y2="24" stroke="#f0c040" stroke-width="1.2"/>
+            <line x1="24" y1="24" x2="36" y2="24" stroke="#f0c040" stroke-width="1.2"/>
+            <line x1="24" y1="35" x2="36" y2="24" stroke="#f0c040" stroke-width="1.2"/>
+            <circle cx="12" cy="18" r="2.2" fill="#60aaff"/>
+            <circle cx="12" cy="30" r="2.2" fill="#60aaff"/>
+            <circle cx="24" cy="13" r="1.8" fill="#7ab8ff"/>
+            <circle cx="24" cy="24" r="1.8" fill="#7ab8ff"/>
+            <circle cx="24" cy="35" r="1.8" fill="#7ab8ff"/>
+            <circle cx="36" cy="24" r="3" fill="#f0c040"/>
+            <circle cx="36" cy="24" r="1.4" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div class="pdf-wordmark">
+          <div class="pdf-wm-text">
+            <span style="color:#ffffff;font-size:20px;font-weight:900;font-family:Arial,sans-serif;letter-spacing:-0.3px;">Campus</span><span style="color:#c8dfff;font-size:13px;font-weight:700;font-family:Arial,sans-serif;font-style:italic;margin:0 2px;">to</span><span style="color:#f0c040;font-size:20px;font-weight:900;font-family:Arial,sans-serif;letter-spacing:-0.3px;">AI</span>
+          </div>
+          <div style="height:1.5px;background:#f0c040;margin:2px 0 3px;opacity:0.7;"></div>
+          <div style="font-size:8.5px;font-style:italic;font-family:Arial,sans-serif;"><span style="color:#c8dfff;">Learn Real. </span><span style="color:#f0c040;font-weight:700;">Get Hired.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="lh-contact">
+      <strong>CampusToAI Academy</strong><br>
+      Live Online · India<br>
+      +91-90233-88910<br>
+      www.campustoai.com
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       DOCUMENT TITLE
+  ═══════════════════════════════════════ -->
+  <div class="doc-title-row">
+    <h2>Student Enrollment Form</h2>
+    <p>CampusToAI Academy &nbsp;|&nbsp; Please read carefully and sign before joining</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       STUDENT DETAILS
+  ═══════════════════════════════════════ -->
+  <div class="student-box">
+    <h3>Student Details</h3>
+    <div class="student-fields">
+      <div class="field">
+        <label>Full Name (as per ID)</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Date of Birth</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Mobile Number</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Highest Qualification</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Batch / Start Date</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field field-full">
+        <label>Course Name</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Course Total Fee (₹)</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Paid Fee (₹)</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Balance Fee (₹)</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Payment Date</label>
+        <div class="field-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       INTRODUCTION
+  ═══════════════════════════════════════ -->
+  <p class="intro">
+    This Agreement is entered into between <strong>CampusToAI Academy</strong> ("Academy", "We", "Us") and the student named above ("Student", "You"). By enrolling and making payment, the Student agrees to be legally bound by all terms and conditions set forth in this document. This Agreement governs the enrollment, fees, refund policy, schedule, placement support, conduct, and all related matters pertaining to the Programme enrolled in by the Student ("Programme"). Please read this document in its entirety before signing.
+  </p>
+
+  <!-- ═══════════════════════════════════════
+       1. PROGRAMME DETAILS
+  ═══════════════════════════════════════ -->
+  <div class="section-title">1. Programme Details</div>
+
+  <div class="clause"><span class="clause-num">1.1</span> The Programme enrolled in by the Student is as communicated by the Academy at the time of admission and is offered exclusively in a live online format via video conferencing platforms designated by the Academy.</div>
+  <div class="clause"><span class="clause-num">1.2</span> The Programme duration, curriculum, and subject matter are as communicated to the Student during the admission process. The Academy reserves the right to make reasonable adjustments to curriculum content without prior notice.</div>
+  <div class="clause"><span class="clause-num">1.3</span> Each batch is limited in size to ensure individualised mentorship. The batch size is determined by the Academy at its sole discretion.</div>
+  <div class="clause"><span class="clause-num">1.4</span> Classes will be conducted live online. Session timings will be communicated prior to batch commencement and are subject to the scheduling terms in Section 5.</div>
+  <div class="clause"><span class="clause-num">1.5</span> A <strong>Certificate of Completion</strong> will be issued upon successful completion of the Programme, including minimum attendance and project submission requirements as defined in Section 7.</div>
+
+  <!-- ═══════════════════════════════════════
+       2. ENROLLMENT & SEAT CONFIRMATION
+  ═══════════════════════════════════════ -->
+  <div class="section-title">2. Enrollment &amp; Seat Confirmation</div>
+
+  <div class="clause"><span class="clause-num">2.1</span> Enrollment is confirmed only upon receipt of the full Programme fee as communicated in the admission offer letter, unless a payment plan has been separately agreed in writing by the Academy.</div>
+  <div class="clause"><span class="clause-num">2.2</span> Seats are allocated on a first-come-first-served basis. Payment of fee does not guarantee enrollment if the batch is already full; in such cases the full fee will be refunded within 7 working days.</div>
+  <div class="clause"><span class="clause-num">2.3</span> The Academy reserves the right to reject an enrollment application if the applicant does not meet the minimum prerequisite criteria communicated during the admission process.</div>
+  <div class="clause"><span class="clause-num">2.4</span> Enrollment is personal and non-transferable. The seat cannot be transferred to another individual.</div>
+
+  <!-- ═══════════════════════════════════════
+       3. FEE & PAYMENT TERMS
+  ═══════════════════════════════════════ -->
+  <div class="section-title">3. Fee &amp; Payment Terms</div>
+
+  <div class="clause"><span class="clause-num">3.1</span> The Programme fee is as stated in the admission offer letter issued to the Student. This fee covers live instruction, recorded session access (where made available), project materials, mock interview sessions, resume review, and placement support as described in Section 6.</div>
+  <div class="clause"><span class="clause-num">3.2</span> The fee does not cover personal hardware, internet connection charges, third-party software licenses, or cloud platform credits beyond those specifically provided by the Academy.</div>
+  <div class="clause"><span class="clause-num">3.3</span> Where an installment plan is agreed in writing, failure to pay any installment within 5 days of the due date may result in suspension of access to classes. Access will be restored upon payment of the outstanding amount.</div>
+  <div class="clause"><span class="clause-num">3.4</span> Fee receipts will be issued via email within 2 working days of confirmed payment.</div>
+
+  <!-- ═══════════════════════════════════════
+       4. REFUND POLICY
+  ═══════════════════════════════════════ -->
+  <div class="section-title">4. No Refund Policy</div>
+
+  <div class="alert-box">
+    <strong>All fees paid to the Academy are non-refundable.</strong> Once enrollment is confirmed by the Academy, no refund will be issued for any reason.
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       5. BATCH SCHEDULE & RESCHEDULING
+  ═══════════════════════════════════════ -->
+  <div class="section-title">5. Batch Schedule &amp; Rescheduling</div>
+
+  <div class="alert-box">
+    The batch schedule is subject to rescheduling. The Academy reserves the right to reschedule sessions, batch timings, or the batch start date at its discretion. The Academy will notify the Student in advance of any such changes.
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       6. PLACEMENT SUPPORT
+  ═══════════════════════════════════════ -->
+  <div class="section-title">6. Placement Support</div>
+
+  <div class="info-box">
+    <strong>What Placement Support Includes:</strong> Resume review &amp; LinkedIn optimisation, GitHub portfolio review, 2 mock technical interview sessions, 1 HR mock interview session, job referrals to the Academy's hiring network, and post-placement follow-up guidance.
+  </div>
+
+  <div class="clause"><span class="clause-num">6.1</span> Placement support is provided as a <strong>best-effort service</strong> and is not a guarantee of employment. The Academy does not guarantee job placement, salary, or interview selection at any specific company.</div>
+  <div class="clause"><span class="clause-num">6.2</span> Placement support commences <strong>only upon full completion of the Programme</strong> and is available to students who have met the attendance and project submission requirements in Section 7.</div>
+  <div class="clause"><span class="clause-num">6.3</span> Students who have outstanding fees or installments are not eligible for placement support until all dues are cleared.</div>
+  <div class="clause"><span class="clause-num">6.4</span> The Academy will provide placement support for a period of <strong>up to 3 months after Programme completion</strong>. After 3 months, placement assistance is at the Academy's discretion.</div>
+  <div class="clause"><span class="clause-num">6.5</span> Placement support is <strong>conditional on active student participation</strong>. The Academy may discontinue support if the student:
+    <ul class="sub-list" style="margin-top:5px;">
+      <li>Does not respond to communication within 48 hours repeatedly;</li>
+      <li>Refuses to attend scheduled mock interviews without prior notice;</li>
+      <li>Declines reasonable job referrals without valid justification on more than 2 occasions;</li>
+      <li>Misrepresents their skills or experience to prospective employers.</li>
+    </ul>
+  </div>
+  <div class="clause"><span class="clause-num">6.6</span> Any salary figures communicated in Academy marketing materials are indicative market ranges based on available data and are not guaranteed outcomes. Actual salary offers depend on the student's performance, the hiring company, location, and market conditions.</div>
+  <div class="clause"><span class="clause-num">6.7</span> Job referrals are introductions only. The Academy does not participate in or influence the hiring decision of any company. Selection, rejection, and offer terms are entirely at the discretion of the respective employer.</div>
+  <div class="clause"><span class="clause-num">6.8</span> The student agrees to notify the Academy within 5 days of receiving any job offer, whether sourced through the Academy's network or independently, so that the Academy may maintain accurate placement records.</div>
+
+  <!-- ═══════════════════════════════════════
+       7. ATTENDANCE & COMPLETION REQUIREMENTS
+  ═══════════════════════════════════════ -->
+  <div class="section-title">7. Attendance &amp; Completion Requirements</div>
+
+  <div class="clause"><span class="clause-num">7.1</span> Students are expected to attend a minimum of <strong>80% of scheduled live sessions</strong>. Attendance below 80% may result in ineligibility for the Completion Certificate and placement support.</div>
+  <div class="clause"><span class="clause-num">7.2</span> Students must complete and submit the <strong>Final Capstone Project</strong> within 7 days of the last scheduled class session to be eligible for the Completion Certificate.</div>
+  <div class="clause"><span class="clause-num">7.3</span> Students are expected to be punctual. Joining a session more than 15 minutes late without prior notice may be marked as absent for that session.</div>
+  <div class="clause"><span class="clause-num">7.4</span> The Academy reserves the right to withhold the Completion Certificate if the student has outstanding fees or has violated the Code of Conduct (Section 8).</div>
+
+  <!-- ═══════════════════════════════════════
+       8. CODE OF CONDUCT
+  ═══════════════════════════════════════ -->
+  <div class="section-title">8. Student Code of Conduct</div>
+
+  <div class="clause"><span class="clause-num">8.1</span> Students must maintain respectful, professional conduct in all live sessions, group chats, and communications with instructors, staff, and fellow students.</div>
+  <div class="clause"><span class="clause-num">8.2</span> The following are strictly prohibited and may result in immediate termination of enrollment without refund:
+    <ul class="sub-list" style="margin-top:5px;">
+      <li>Harassment, bullying, or discriminatory behaviour towards any person;</li>
+      <li>Sharing, distributing, or uploading Academy class recordings, materials, or content to any third party or public platform;</li>
+      <li>Academic dishonesty including submission of work that is not the student's own;</li>
+      <li>Attempting to circumvent or misuse Academy systems or platforms;</li>
+      <li>Recording of live sessions without explicit written permission from the Academy.</li>
+    </ul>
+  </div>
+  <div class="clause"><span class="clause-num">8.3</span> Students are required to maintain a functioning camera and microphone for live sessions. The Academy may require cameras to be on during key interactive sessions.</div>
+
+  <!-- ═══════════════════════════════════════
+       9. INTELLECTUAL PROPERTY
+  ═══════════════════════════════════════ -->
+  <div class="section-title">9. Intellectual Property</div>
+
+  <div class="clause"><span class="clause-num">9.1</span> All course content, materials, session recordings, slides, code samples, and curriculum developed by the Academy are the exclusive intellectual property of CampusToAI Academy and are protected under applicable Indian copyright law.</div>
+  <div class="clause"><span class="clause-num">9.2</span> Students are granted a limited, personal, non-transferable, non-exclusive licence to use course materials solely for personal learning purposes during and after the Programme.</div>
+  <div class="clause"><span class="clause-num">9.3</span> Projects built by students during the Programme using the Academy's framework remain the student's intellectual property. The Academy may, with the student's written consent, use anonymised project descriptions for marketing and promotional purposes.</div>
+
+  <!-- ═══════════════════════════════════════
+       10. PRIVACY & DATA
+  ═══════════════════════════════════════ -->
+  <div class="section-title">10. Privacy &amp; Data</div>
+
+  <div class="clause"><span class="clause-num">10.1</span> The Academy collects and processes student personal data (name, contact, educational background) solely for the purposes of delivering the Programme, providing placement support, and issuing certificates.</div>
+  <div class="clause"><span class="clause-num">10.2</span> Student data will not be sold to third parties. Data may be shared with prospective employers as part of the placement referral process, with the student's implied consent by enrolling.</div>
+  <div class="clause"><span class="clause-num">10.3</span> The Academy may request permission to use the student's name, testimonial, and placement outcome in marketing materials. Participation is entirely voluntary and does not affect any Academy services.</div>
+
+  <!-- ═══════════════════════════════════════
+       11. LIABILITY LIMITATION
+  ═══════════════════════════════════════ -->
+  <div class="section-title">11. Limitation of Liability</div>
+
+  <div class="clause"><span class="clause-num">11.1</span> The Academy's total liability to the student under this Agreement, in any circumstance, shall not exceed the total Programme fee paid by the student.</div>
+  <div class="clause"><span class="clause-num">11.2</span> The Academy is not liable for any indirect, consequential, or special damages including loss of employment opportunity, salary, or business arising from the student's use of or inability to use Academy services.</div>
+  <div class="clause"><span class="clause-num">11.3</span> The Academy is not responsible for disruptions caused by third-party platforms (Zoom, Google Meet, etc.), internet outages, or force majeure events including pandemics, natural disasters, or government-imposed restrictions.</div>
+
+  <!-- ═══════════════════════════════════════
+       12. DISPUTE RESOLUTION & GOVERNING LAW
+  ═══════════════════════════════════════ -->
+  <div class="section-title">12. Dispute Resolution &amp; Governing Law</div>
+
+  <div class="clause"><span class="clause-num">12.1</span> In the event of a dispute, the parties agree to first attempt resolution through good-faith discussion within 15 days of the dispute being raised in writing.</div>
+  <div class="clause"><span class="clause-num">12.2</span> If the dispute cannot be resolved through discussion, it shall be referred to a sole arbitrator mutually agreed upon by both parties, in accordance with the Arbitration and Conciliation Act, 1996 (India).</div>
+  <div class="clause"><span class="clause-num">12.3</span> This Agreement shall be governed by and construed in accordance with the laws of India. The courts of <strong>Pune, Maharashtra</strong> shall have exclusive jurisdiction over all disputes arising under this Agreement.</div>
+
+  <!-- ═══════════════════════════════════════
+       13. AMENDMENTS
+  ═══════════════════════════════════════ -->
+  <div class="section-title">13. Amendments</div>
+
+  <div class="clause"><span class="clause-num">13.1</span> The Academy reserves the right to amend these terms and conditions. Material amendments will be communicated to enrolled students in writing at least 7 days before taking effect. Continued participation in the Programme constitutes acceptance of the amended terms.</div>
+
+  <!-- ═══════════════════════════════════════
+       STUDENT CHECKLIST
+  ═══════════════════════════════════════ -->
+  <div class="section-title">Student Acknowledgement Checklist</div>
+  <p style="font-size:11px;color:#444;margin-bottom:8px;">Please initial each box to confirm you have read and understood each term:</p>
+  <ul class="check-list">
+    <li>I have read and understood the Programme details, duration, and format (Section 1).</li>
+    <li>I understand that the seat is confirmed only upon full fee payment (Section 2).</li>
+    <li>I understand that all fees paid are non-refundable under any circumstances once enrollment is confirmed (Section 4).</li>
+    <li>I accept that the batch schedule is subject to rescheduling at the Academy's discretion with prior notice (Section 5).</li>
+    <li>I understand that placement support is a best-effort service and not a guarantee of employment (Section 6).</li>
+    <li>I understand that placement support is conditional on completing the Programme and active participation (Sections 6 &amp; 7).</li>
+    <li>I agree to maintain 80% attendance and submit the capstone project to receive my certificate (Section 7).</li>
+    <li>I agree to the code of conduct and understand that violations may result in termination without refund (Section 8).</li>
+    <li>I will not record, share, or distribute any Academy content without written permission (Sections 8 &amp; 9).</li>
+    <li>I consent to my data being used for placement referrals as described (Section 10).</li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════
+       DECLARATION
+  ═══════════════════════════════════════ -->
+  <div class="declaration">
+    <strong>Declaration by Student:</strong><br>
+    I, the undersigned, hereby declare that I have read, understood, and voluntarily agree to all terms and conditions set forth in this Enrollment Agreement. I confirm that the information provided above is accurate and complete. I acknowledge that this Agreement constitutes a legally binding contract between myself and CampusToAI Academy. I further confirm that I am above 18 years of age, or if below 18, that my parent / guardian has co-signed this Agreement in acknowledgement.
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SIGNATURES
+  ═══════════════════════════════════════ -->
+  <div class="sig-section">
+    <div class="sig-title">Signatures</div>
+    <div class="sig-grid">
+      <div class="sig-block">
+        <label>Student Signature</label>
+        <div class="sig-line"></div>
+        <div style="display:flex;gap:32px;margin-top:10px;">
+          <div class="sig-block" style="flex:1;">
+            <label>Full Name</label>
+            <div class="field-line"></div>
+          </div>
+          <div class="sig-block" style="flex:1;">
+            <label>Date</label>
+            <div class="field-line"></div>
+          </div>
+        </div>
+        <p>Student's own signature</p>
+      </div>
+      <div class="sig-block">
+        <label>Parent / Guardian Signature <em style="font-style:normal;color:#888;">(if student is below 18)</em></label>
+        <div class="sig-line"></div>
+        <div style="display:flex;gap:32px;margin-top:10px;">
+          <div class="sig-block" style="flex:1;">
+            <label>Full Name</label>
+            <div class="field-line"></div>
+          </div>
+          <div class="sig-block" style="flex:1;">
+            <label>Date</label>
+            <div class="field-line"></div>
+          </div>
+        </div>
+        <p>Parent / Guardian signature &amp; name</p>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;border-top:1px dashed #ccc;padding-top:16px;">
+      <div class="sig-grid">
+        <div class="sig-block">
+          <label>Authorised Signatory — CampusToAI Academy</label>
+          <div class="sig-line"></div>
+          <div style="display:flex;gap:32px;margin-top:10px;">
+            <div class="sig-block" style="flex:1;">
+              <label>Name &amp; Designation</label>
+              <div class="field-line"></div>
+            </div>
+            <div class="sig-block" style="flex:1;">
+              <label>Date</label>
+              <div class="field-line"></div>
+            </div>
+          </div>
+          <p>Academy representative signature &amp; seal</p>
+        </div>
+        <div class="sig-block">
+          <label>Academy Stamp / Seal</label>
+          <div class="sig-line" style="min-height:64px;border:1px dashed #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:10px;color:#bbb;">Official Stamp Here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       DOCUMENT FOOTER
+  ═══════════════════════════════════════ -->
+  <div class="doc-footer">
+    <span>CampusToAI Academy &nbsp;|&nbsp; www.campustoai.com &nbsp;|&nbsp; +91-90233-88910</span>
+    <span>Document Version 1.0 &nbsp;|&nbsp; Effective April 2026 &nbsp;|&nbsp; Page 1 of 1</span>
+  </div>
+
+</div>
+</body>
+</html>
