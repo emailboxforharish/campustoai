@@ -193,6 +193,10 @@ p  { color: #374151; }
   flex-shrink: 0;
 }
 
+@media (max-width: 860px) {
+  .logo-slogan { display: none; }
+}
+
 .nav-logo span { color: var(--yellow); }
 
 .nav-links {
