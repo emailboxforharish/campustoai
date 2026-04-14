@@ -128,6 +128,7 @@
       <li><a href="placement.html">Placement</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="docs/course-brochure.html" target="_blank" class="btn btn-sm nav-cta" style="background:rgba(240,192,64,.15);color:var(--yellow);border:1.5px solid rgba(240,192,64,.4);">📄 Course Brochure</a></li>
       <li><a href="docs/enrollment-form.html?download" target="_blank" class="btn btn-sm nav-cta" style="background:rgba(240,192,64,.15);color:var(--yellow);border:1.5px solid rgba(240,192,64,.4);">⬇ Enrollment Form</a></li>
       <li><a href="enroll.html" class="btn btn-primary btn-sm nav-cta">Enroll Now →</a></li>
     </ul>
@@ -160,6 +161,7 @@
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="enroll.html">Enroll Now</a></li>
+          <li><a href="docs/course-brochure.html" target="_blank" style="color:var(--yellow);">📄 Course Brochure</a></li>
           <li><a href="docs/enrollment-form.html?download" target="_blank" style="color:var(--yellow);">⬇ Enrollment Form (PDF)</a></li>
         </ul>
       </div>
