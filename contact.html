@@ -200,5 +200,28 @@
 </a>
 
 <script src="js/components.js"></script>
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    var name    = document.getElementById('name').value.trim();
+    var email   = document.getElementById('email').value.trim();
+    var phone   = document.getElementById('phone').value.trim();
+    var subject = document.getElementById('subject').value;
+    var message = document.getElementById('message').value.trim();
+
+    var text =
+      'Hi CampusToAI Academy,' +
+      '%0AName: ' + encodeURIComponent(name) +
+      '%0AEmail: ' + encodeURIComponent(email) +
+      '%0APhone: ' + encodeURIComponent(phone) +
+      (subject ? '%0ATopic: ' + encodeURIComponent(subject) : '') +
+      (message ? '%0AMessage: ' + encodeURIComponent(message) : '');
+
+    window.open('https://wa.me/919023388910?text=' + text, '_blank');
+
+    document.querySelector('form').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
 </body>
 </html>

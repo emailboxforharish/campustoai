@@ -406,5 +406,30 @@
 </a>
 
 <script src="js/components.js"></script>
+<script>
+  function handleEnroll(e) {
+    e.preventDefault();
+    var name   = document.getElementById('ename').value.trim();
+    var email  = document.getElementById('eemail').value.trim();
+    var phone  = document.getElementById('ephone').value.trim();
+    var batch  = document.getElementById('batch').value;
+    var qual   = document.getElementById('qual').value;
+    var note   = document.getElementById('note').value.trim();
+
+    var text =
+      'Hi CampusToAI Academy, I would like to enroll!' +
+      '%0AName: ' + encodeURIComponent(name) +
+      '%0AEmail: ' + encodeURIComponent(email) +
+      '%0APhone: ' + encodeURIComponent(phone) +
+      (batch ? '%0AStart Preference: ' + encodeURIComponent(batch) : '') +
+      (qual  ? '%0AQualification: '    + encodeURIComponent(qual)  : '') +
+      (note  ? '%0ANote: '             + encodeURIComponent(note)  : '');
+
+    window.open('https://wa.me/919023388910?text=' + text, '_blank');
+
+    document.querySelector('form').style.display = 'none';
+    document.getElementById('enrollSuccess').style.display = 'block';
+  }
+</script>
 </body>
 </html>
