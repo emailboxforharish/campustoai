@@ -164,6 +164,7 @@
 <li><a href="docs/course-brochure.html" target="_blank" style="color:var(--yellow);">📄 Course Brochure</a></li>
           <li><a href="enroll.html#how-to-enroll" style="color:var(--yellow);">⬇ Enrollment Form</a></li>
           <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
         </ul>
       </div>
       <div class="footer-col">
