@@ -43,4 +43,11 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://www.campustoai.com/terms.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
