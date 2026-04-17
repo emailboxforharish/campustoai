@@ -129,7 +129,6 @@
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="contact.html">Contact</a></li>
 <li><a href="docs/course-brochure.html" target="_blank" class="btn btn-sm nav-cta" style="background:rgba(240,192,64,.15);color:var(--yellow);border:1.5px solid rgba(240,192,64,.4);">📄 Course Brochure</a></li>
-      <li><a href="docs/enrollment-form.html?download" target="_blank" class="btn btn-sm nav-cta" style="background:rgba(240,192,64,.15);color:var(--yellow);border:1.5px solid rgba(240,192,64,.4);">⬇ Enrollment Form</a></li>
       <li><a href="enroll.html" class="btn btn-primary btn-sm nav-cta">Enroll Now →</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
@@ -163,7 +162,8 @@
           <li><a href="enroll.html">Enroll Now</a></li>
           <li><a href="enroll.html#how-to-enroll">How to Enroll</a></li>
 <li><a href="docs/course-brochure.html" target="_blank" style="color:var(--yellow);">📄 Course Brochure</a></li>
-          <li><a href="docs/enrollment-form.html?download" target="_blank" style="color:var(--yellow);">⬇ Enrollment Form (PDF)</a></li>
+          <li><a href="enroll.html#how-to-enroll" style="color:var(--yellow);">⬇ Enrollment Form</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
         </ul>
       </div>
       <div class="footer-col">
