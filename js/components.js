@@ -92,10 +92,10 @@
       <circle cx="17" cy="8"  r="1.4" fill="#f0c040" opacity="0.35"/>
       <circle cx="17" cy="50" r="1.4" fill="#f0c040" opacity="0.35"/>
 
-      <!-- ── Wordmark: Campus · to · AI ── -->
-      <text x="63"  y="31" font-family="Arial,sans-serif" font-size="22" font-weight="800" fill="#ffffff"  letter-spacing="-0.3">Campus</text>
-      <text x="162" y="31" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#c8dfff"  letter-spacing="0.5" font-style="italic">to</text>
-      <text x="180" y="31" font-family="Arial,sans-serif" font-size="22" font-weight="800" fill="#f0c040"  letter-spacing="-0.3">AI</text>
+      <!-- ── Wordmark: CampusToAI ── -->
+      <text x="63" y="31" font-family="Arial,sans-serif" font-weight="800" letter-spacing="-0.3">
+        <tspan font-size="22" fill="#ffffff">Campus</tspan><tspan font-size="22" fill="#c8dfff">To</tspan><tspan font-size="22" fill="#f0c040">AI</tspan>
+      </text>
 
       <!-- Shimmer underline -->
       <rect x="63" y="34" width="130" height="1.6" rx="1" fill="url(#${prefix}shimmer)"/>
