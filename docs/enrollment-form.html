@@ -138,6 +138,44 @@
     .sig-line { border-bottom: 1px solid #333; min-height: 32px; }
     .sig-block p { font-size: 8.5px; color: #888; margin-top: 2px; }
 
+    /* ── Photo box ── */
+    .photo-box {
+      width: 88px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .photo-placeholder {
+      width: 88px;
+      height: 108px;
+      border: 1.5px dashed #0d1b5e;
+      border-radius: 3px;
+      background: #f4f6fb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #8899cc;
+      font-family: Arial, sans-serif;
+    }
+    .photo-placeholder svg { opacity: .45; }
+    .photo-placeholder span {
+      font-size: 7.5px;
+      text-align: center;
+      line-height: 1.5;
+      color: #7788bb;
+    }
+    .photo-label {
+      font-size: 7.5px;
+      color: #888;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      line-height: 1.4;
+    }
+
     /* ── Footer ── */
     .doc-footer {
       margin-top: 16px; border-top: 1px solid #dde3f0; padding-top: 6px;
@@ -204,7 +242,8 @@
   <!-- STUDENT DETAILS -->
   <div class="student-box">
     <h3>Student Details</h3>
-    <div class="student-fields">
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+    <div class="student-fields" style="flex:1;">
       <div class="field">
         <label>Full Name</label>
         <div class="field-line"></div>
@@ -256,6 +295,21 @@
       </div>
 
     </div>
+
+    <!-- Photo box -->
+    <div class="photo-box">
+      <div class="photo-placeholder">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8899cc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <span>Affix Recent<br>Photograph</span>
+      </div>
+      <div class="photo-label">Passport Size<br>(3.5 cm × 4.5 cm)</div>
+    </div>
+
+    </div><!-- end flex wrapper -->
   </div>
 
   <!-- KEY TERMS -->

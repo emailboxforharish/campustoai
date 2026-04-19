@@ -832,6 +832,93 @@
     .print-btn:hover { background: #1a2f8a; }
 
     @media print { .print-bar { display: none !important; } }
+
+    /* ============================================================
+       RESPONSIVE — SCREEN ONLY (print styles preserved above)
+    ============================================================ */
+    @media screen and (max-width: 720px) {
+
+      /* Page: drop fixed 210mm width, fill the screen */
+      .page {
+        width: 100%;
+        margin: 0 0 16px;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      /* Cover: remove fixed min-height */
+      .cover { min-height: auto; }
+
+      /* Cover paddings */
+      .cover-top   { padding: 20px 20px 0; }
+      .cover-hero  { padding: 32px 20px 24px; }
+      .cover-footer {
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+
+      /* Cover title */
+      .cover-title  { font-size: 1.8rem; }
+      .cover-eyebrow { font-size: .68rem; }
+      .cover-stats  { max-width: 100%; }
+      .cover-stat-val { font-size: 1.6rem; }
+
+      /* Inner pages */
+      .page-inner { padding: 20px 16px; min-height: auto; }
+
+      /* Page header */
+      .page-header { margin-bottom: 18px; }
+      .page-header-brand { font-size: .65rem; }
+
+      /* Section heading */
+      .section-heading h2 { font-size: 1.1rem; }
+
+      /* All 2-col / 3-col grids → 1 col on phone */
+      .grid-2,
+      .grid-3,
+      .overview-grid,
+      .inclusion-grid,
+      .faq-grid { grid-template-columns: 1fr; }
+
+      /* Topic body: 3-col → 1-col */
+      .topic-body,
+      .topic-body-2col { grid-template-columns: 1fr; }
+
+      /* Section banner: hide big number, wrap text */
+      .section-banner { flex-wrap: wrap; gap: 8px; }
+      .section-banner-num { font-size: 1.6rem; min-width: auto; }
+      .section-banner-weeks { margin-left: 0; }
+
+      /* Capstone: 3-col → 2-col on phone */
+      .capstone-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Pricing box: stack vertically */
+      .pricing-box { flex-direction: column; gap: 14px; padding: 20px; }
+
+      /* CTA page */
+      .cta-page    { padding: 36px 20px; min-height: auto; }
+      .cta-title   { font-size: 1.5rem; }
+      .cta-inner   { max-width: 100%; }
+      .cta-contact-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Print bar */
+      .print-bar { bottom: 12px; right: 12px; }
+      .print-btn { font-size: .72rem; padding: 10px 16px; }
+
+      /* Instructor experience grid inside page 2 */
+      .instructor-grid { grid-template-columns: 1fr !important; }
+    }
+
+    @media screen and (max-width: 400px) {
+      .cover-title       { font-size: 1.45rem; }
+      .capstone-grid     { grid-template-columns: 1fr; }
+      .cta-contact-grid  { grid-template-columns: 1fr; }
+      .cover-pills       { gap: 5px; }
+      .cover-pill        { font-size: .65rem; padding: 4px 10px; }
+      .pricing-amount    { font-size: 1.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -966,7 +1053,7 @@
         </div>
         <div style="background:var(--off);border-radius:var(--radius);padding:18px 20px;">
           <div style="font-size:.7rem;font-weight:700;color:var(--navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;">Our instructors bring experience from</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <div class="instructor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
             <div style="font-size:.72rem;color:#374151;display:flex;gap:6px;align-items:center;"><span style="color:var(--navy2);font-weight:800;">→</span> Product companies</div>
             <div style="font-size:.72rem;color:#374151;display:flex;gap:6px;align-items:center;"><span style="color:var(--navy2);font-weight:800;">→</span> Cloud-native startups</div>
             <div style="font-size:.72rem;color:#374151;display:flex;gap:6px;align-items:center;"><span style="color:var(--navy2);font-weight:800;">→</span> Enterprise IT orgs</div>
