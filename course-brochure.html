@@ -925,6 +925,7 @@
 
 <!-- PRINT BUTTON -->
 <div class="print-bar no-print">
+  <a href="index.html" class="print-btn" style="text-decoration:none;background:#1a2f8a;">← Home</a>
   <button class="print-btn" onclick="window.print()">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
     Save as PDF
@@ -939,7 +940,7 @@
   <div class="cover">
 
     <div class="cover-top">
-      <div class="logo-lg"></div>
+      <a href="index.html" class="logo-lg"></a>
       <div class="cover-badge">2026 Batch · Limited Seats</div>
     </div>
 
@@ -1743,7 +1744,7 @@
     <div class="section-heading" style="margin-bottom:16px;">
       <div class="badge badge-navy">All-Inclusive</div>
       <h2>Everything Included at ₹49,999</h2>
-      <p>One price, zero hidden fees. No separate charges for materials, recordings, mentoring, or the certificate.</p>
+      <p>One price, GST included, zero hidden fees. No separate charges for materials, recordings, mentoring, or the certificate.</p>
     </div>
 
     <div class="inclusion-grid" style="margin-bottom:22px;">
@@ -1809,7 +1810,7 @@
       <div class="pricing-main">
         <div class="pricing-label">Programme Fee</div>
         <div class="pricing-amount">₹49,999</div>
-        <div class="pricing-note">All-inclusive · Bank transfer or UPI · No hidden charges</div>
+        <div class="pricing-note">All-inclusive · GST included · Bank transfer or UPI · No hidden charges</div>
       </div>
       <div class="pricing-emi">
         <h4>EMI / Instalment Option</h4>
@@ -2038,8 +2039,7 @@
       '<text x="63" y="31" font-family="Arial,sans-serif" font-weight="800" letter-spacing="-0.3"><tspan font-size="22" fill="#ffffff">Campus</tspan><tspan font-size="22" fill="#c8dfff">To</tspan><tspan font-size="22" fill="#f0c040">AI</tspan></text>' +
       '<rect x="63" y="34" width="130" height="1.6" rx="1" fill="url(#' + prefix + 'shimmer)"/>' +
       '<text x="63" y="48" font-family="Arial,sans-serif" font-size="9.5" font-style="italic">' +
-        '<tspan fill="#c8dfff" letter-spacing="0.4" opacity="0.9">Learn Real. </tspan>' +
-        '<tspan fill="#f0c040" font-weight="700" letter-spacing="0.3">Get Hired.</tspan>' +
+        '<tspan fill="#f0c040" font-weight="600" letter-spacing="0.4">Learn Real. Get Hired.</tspan>' +
       '</text>' +
     '</svg>';
   }
@@ -2048,7 +2048,7 @@
   var lgEls = document.querySelectorAll('.logo-lg');
   lgEls.forEach(function(el, i) {
     var svg = logoSVG('lg' + i + '_');
-    el.style.cssText = 'display:inline-block;width:220px;height:58px;';
+    el.style.cssText = 'display:inline-block;width:220px;height:58px;text-decoration:none;';
     el.innerHTML = svg;
     el.querySelector('svg').setAttribute('width', '220');
     el.querySelector('svg').setAttribute('height', '58');
