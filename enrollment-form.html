@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Enrollment Form — CampusToAI Academy</title>
+  <style>
+    @page { size: A4 portrait; margin: 15mm 18mm 18mm 18mm; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 11.5px; }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      color: #111;
+      background: #e8e8e8;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      padding: 14mm 16mm 16mm;
+      background: #fff;
+      box-shadow: 0 4px 32px rgba(0,0,0,.18);
+    }
+    @media print {
+      body { background: #fff; padding-top: 0 !important; }
+      .page { width: 100%; min-height: unset; margin: 0; padding: 0; box-shadow: none; }
+      .no-print { display: none !important; }
+      .section-title, .alert-box, .letterhead, .student-box, .declaration {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ── Print bar ── */
+    .print-bar {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: #0d1b5e; padding: 10px 20px;
+      display: flex; justify-content: flex-end; align-items: center;
+      z-index: 999; box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .print-btn {
+      background: #f0c040; color: #0d1b5e; border: none;
+      padding: 8px 22px; border-radius: 6px; font-weight: 800;
+      font-size: 13px; cursor: pointer;
+    }
+    .print-btn:hover { background: #d4a800; }
+    body { padding-top: 52px; }
+
+    /* ── Letterhead ── */
+    .letterhead {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #0d1b5e; border-radius: 6px 6px 0 0;
+      padding: 12px 16px; margin-bottom: 4px;
+    }
+    .lh-contact { text-align: right; font-size: 9px; color: rgba(255,255,255,.75); line-height: 1.7; }
+    .lh-contact strong { color: #f0c040; }
+
+    /* ── Doc title ── */
+    .doc-title-row {
+      text-align: center; margin: 10px 0 8px;
+      border: 2px solid #0d1b5e; border-radius: 4px;
+      padding: 6px 0; background: #f4f6fb;
+    }
+    .doc-title-row h2 {
+      font-family: Arial, sans-serif; font-size: 12.5px;
+      color: #0d1b5e; text-transform: uppercase; letter-spacing: .08em;
+    }
+    .doc-title-row p { font-size: 9px; color: #555; margin-top: 2px; }
+
+    /* ── Student box ── */
+    .student-box {
+      border: 1.5px solid #0d1b5e; border-radius: 4px;
+      padding: 10px 12px; margin-bottom: 12px; background: #fafbff;
+    }
+    .student-box h3 {
+      font-family: Arial, sans-serif; font-size: 9.5px; color: #0d1b5e;
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 8px; border-bottom: 1px solid #dde3f0; padding-bottom: 4px;
+    }
+    .student-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 8.5px; color: #666; text-transform: uppercase; letter-spacing: .05em; font-family: Arial, sans-serif; }
+    .field-line { border-bottom: 1px solid #333; min-height: 16px; width: 100%; }
+    .field-full { grid-column: 1 / -1; }
+
+    /* ── Section title ── */
+    .section-title {
+      font-family: Arial, sans-serif; font-size: 10px; font-weight: 700;
+      color: #fff; background: #0d1b5e; padding: 4px 9px;
+      margin: 14px 0 8px; text-transform: uppercase; letter-spacing: .05em; border-radius: 2px;
+    }
+
+    /* ── Key terms list ── */
+    .terms-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 6px; }
+    .term-item {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 10.5px; color: #222; line-height: 1.6;
+    }
+    .term-icon { flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+
+    /* ── Alert box ── */
+    .alert-box {
+      border-left: 4px solid #c49a00; background: #fffbea;
+      padding: 8px 12px; margin: 10px 0;
+      font-size: 10.5px; color: #333; line-height: 1.6;
+    }
+    .alert-box strong { color: #7a5c00; }
+
+    /* ── Checklist ── */
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 5px; margin: 6px 0; padding-left: 6px; }
+    .check-list li {
+      font-size: 10.5px; color: #222; line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .check-list li::before { content: '□'; font-size: 12px; color: #0d1b5e; flex-shrink: 0; }
+
+    /* ── Declaration ── */
+    .declaration {
+      background: #f4f6fb; border: 1.5px solid #0d1b5e; border-radius: 4px;
+      padding: 10px 12px; margin: 14px 0;
+      font-size: 10.5px; line-height: 1.65; color: #222; text-align: justify;
+    }
+    .declaration strong { color: #0d1b5e; }
+
+    /* ── Signatures ── */
+    .sig-section { margin-top: 16px; border-top: 2px solid #0d1b5e; padding-top: 14px; }
+    .sig-title {
+      font-family: Arial, sans-serif; font-size: 10.5px; font-weight: 700;
+      color: #0d1b5e; text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 14px; text-align: center;
+    }
+    .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .sig-block { display: flex; flex-direction: column; gap: 6px; }
+    .sig-block label { font-size: 8.5px; color: #666; text-transform: uppercase; letter-spacing: .05em; font-family: Arial, sans-serif; }
+    .sig-line { border-bottom: 1px solid #333; min-height: 32px; }
+    .sig-block p { font-size: 8.5px; color: #888; margin-top: 2px; }
+
+    /* ── Photo box ── */
+    .photo-box {
+      width: 88px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .photo-placeholder {
+      width: 88px;
+      height: 108px;
+      border: 1.5px dashed #0d1b5e;
+      border-radius: 3px;
+      background: #f4f6fb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #8899cc;
+      font-family: Arial, sans-serif;
+    }
+    .photo-placeholder svg { opacity: .45; }
+    .photo-placeholder span {
+      font-size: 7.5px;
+      text-align: center;
+      line-height: 1.5;
+      color: #7788bb;
+    }
+    .photo-label {
+      font-size: 7.5px;
+      color: #888;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── Footer ── */
+    .doc-footer {
+      margin-top: 16px; border-top: 1px solid #dde3f0; padding-top: 6px;
+      display: flex; justify-content: space-between;
+      font-size: 8.5px; color: #888; font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Print bar -->
+<div class="print-bar no-print">
+  <button onclick="window.print()" class="print-btn">🖨 Print / Save as PDF</button>
+</div>
+
+<script>
+  if (window.location.search.includes('download')) {
+    window.addEventListener('load', function() { setTimeout(function() { window.print(); }, 400); });
+  }
+</script>
+
+<div class="page">
+
+  <!-- LETTERHEAD -->
+  <div class="letterhead">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <svg viewBox="0 0 48 48" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,24 34,7 14,7 4,24 14,41 34,41" fill="#1a4fd8"/>
+        <polygon points="44,24 34,7 14,7 4,24 14,41 34,41" fill="none" stroke="#f0c040" stroke-width="1.5"/>
+        <line x1="12" y1="18" x2="24" y2="13" stroke="#90b8ff" stroke-width="1"/>
+        <line x1="12" y1="18" x2="24" y2="24" stroke="#90b8ff" stroke-width="1"/>
+        <line x1="12" y1="30" x2="24" y2="24" stroke="#90b8ff" stroke-width="1"/>
+        <line x1="12" y1="30" x2="24" y2="35" stroke="#90b8ff" stroke-width="1"/>
+        <line x1="24" y1="13" x2="36" y2="24" stroke="#f0c040" stroke-width="1.2"/>
+        <line x1="24" y1="24" x2="36" y2="24" stroke="#f0c040" stroke-width="1.2"/>
+        <line x1="24" y1="35" x2="36" y2="24" stroke="#f0c040" stroke-width="1.2"/>
+        <circle cx="12" cy="18" r="2.2" fill="#60aaff"/>
+        <circle cx="12" cy="30" r="2.2" fill="#60aaff"/>
+        <circle cx="24" cy="13" r="1.8" fill="#7ab8ff"/>
+        <circle cx="24" cy="24" r="1.8" fill="#7ab8ff"/>
+        <circle cx="24" cy="35" r="1.8" fill="#7ab8ff"/>
+        <circle cx="36" cy="24" r="3" fill="#f0c040"/>
+        <circle cx="36" cy="24" r="1.4" fill="#fff"/>
+      </svg>
+      <div>
+        <div><span style="color:#fff;font-size:18px;font-weight:900;font-family:Arial,sans-serif;">Campus</span><span style="color:#c8dfff;font-size:18px;font-weight:900;font-family:Arial,sans-serif;">To</span><span style="color:#f0c040;font-size:18px;font-weight:900;font-family:Arial,sans-serif;">AI</span></div>
+        <div style="font-size:8px;font-family:Arial,sans-serif;color:#c8dfff;font-style:italic;">Learn Real. <span style="color:#f0c040;font-weight:700;">Get Hired.</span></div>
+      </div>
+    </div>
+    <div class="lh-contact">
+      <strong>CampusToAI Academy</strong><br>
+      Online Training Institute, India<br>
+      +91-90233-88910<br>
+      www.campustoai.com
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <div class="doc-title-row">
+    <h2>Student Enrollment Form</h2>
+    <p>Full-Stack Java + Cloud + AI Developer Program &nbsp;|&nbsp; Please read, sign and submit before batch start</p>
+  </div>
+
+  <!-- STUDENT DETAILS -->
+  <div class="student-box">
+    <h3>Student Details</h3>
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+    <div class="student-fields" style="flex:1;">
+      <div class="field">
+        <label>Full Name</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Mobile / WhatsApp Number</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field field-full">
+        <label>Address Line</label>
+        <div class="field-line"></div>
+        <div class="field-line" style="margin-top:6px;"></div>
+      </div>
+      <div class="field">
+        <label>City</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>State</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Country</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Pincode</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>College / Institute Name</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>University / Board</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Highest Qualification</label>
+        <div class="field-line"></div>
+      </div>
+      <div class="field">
+        <label>Passout Year</label>
+        <div class="field-line"></div>
+      </div>
+
+    </div>
+
+    <!-- Photo box -->
+    <div class="photo-box">
+      <div class="photo-placeholder">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8899cc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <span>Affix Recent<br>Photograph</span>
+      </div>
+      <div class="photo-label">Passport Size<br>(3.5 cm × 4.5 cm)</div>
+    </div>
+
+    </div><!-- end flex wrapper -->
+  </div>
+
+  <!-- KEY TERMS -->
+  <div class="section-title">Key Terms &amp; Conditions</div>
+
+  <div class="terms-list">
+    <div class="term-item">
+      <span class="term-icon">💳</span>
+      <span><strong>Fee:</strong> ₹49,999 all-inclusive. Covers live classes, recordings, projects, mentoring, study materials, certificate, and mock interviews. No hidden charges.</span>
+    </div>
+    <div class="term-item">
+      <span class="term-icon">🚫</span>
+      <span><strong>No Refund Policy:</strong> All fees paid are non-refundable under any circumstances once payment is made.</span>
+    </div>
+    <div class="term-item">
+      <span class="term-icon">📅</span>
+      <span><strong>Schedule:</strong> Class timings are agreed with the batch before start. The Academy may reschedule sessions with reasonable prior notice.</span>
+    </div>
+    <div class="term-item">
+      <span class="term-icon">✅</span>
+      <span><strong>Attendance:</strong> Minimum 80% attendance and submission of the final project are required to receive the Certificate of Completion.</span>
+    </div>
+    <div class="term-item">
+      <span class="term-icon">🎓</span>
+      <span><strong>Placement Support:</strong> Resume review, mock interviews, and job referrals are provided as a best-effort service. Job placement is not guaranteed.</span>
+    </div>
+    <div class="term-item">
+      <span class="term-icon">🔒</span>
+      <span><strong>Intellectual Property:</strong> Course materials and recordings are for personal use only. Sharing, distributing, or republishing any Academy content is strictly prohibited.</span>
+    </div>
+    <div class="term-item">
+      <span class="term-icon">🤝</span>
+      <span><strong>Conduct:</strong> Students must maintain respectful, professional behaviour. Misconduct may result in immediate termination of enrollment without refund.</span>
+    </div>
+    <div class="term-item">
+      <span class="term-icon">⚖️</span>
+      <span><strong>Governing Law:</strong> This agreement is governed by the laws of India. Disputes shall be subject to the jurisdiction of courts in Pune, Maharashtra.</span>
+    </div>
+  </div>
+
+  <p style="font-size:9.5px;color:#555;margin-top:8px;">Full terms available at: <strong>www.campustoai.com/terms.html</strong></p>
+
+  <!-- SIGNATURES -->
+  <div class="sig-section">
+    <div class="sig-title">Signature</div>
+    <div style="display:flex;gap:32px;margin-top:8px;">
+      <div class="sig-block" style="flex:2;">
+        <label>Student Signature</label>
+        <div class="sig-line"></div>
+      </div>
+      <div class="sig-block" style="flex:1;">
+        <label>Date</label>
+        <div class="sig-line"></div>
+      </div>
+      <div class="sig-block" style="flex:1;">
+        <label>Place</label>
+        <div class="sig-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>CampusToAI Academy &nbsp;|&nbsp; www.campustoai.com &nbsp;|&nbsp; +91-90233-88910</span>
+    <span>Version 2.0 &nbsp;|&nbsp; April 2026</span>
+  </div>
+
+</div>
+</body>
+</html>
