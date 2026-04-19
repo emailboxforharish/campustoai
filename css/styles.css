@@ -1338,3 +1338,17 @@ details.faq-item[open] .faq-icon {
 @media (max-width: 400px) {
   .enroll-steps-grid { grid-template-columns: 1fr !important; }
 }
+
+/* Who Is It For / Before You Apply — two-column split */
+.two-col-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .two-col-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
