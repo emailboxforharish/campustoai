@@ -65,6 +65,20 @@ Every page has the same shell:
 
 When creating a new page, copy an existing page's head and placeholder structure.
 
+### Exceptions to the Page Pattern
+
+`course-brochure.html` is a standalone print document — it does **not** follow the standard pattern:
+- No `components.js`, no nav/footer placeholders
+- All CSS is inlined in a `<style>` block (print-optimised, A4 pages)
+- Has its own copy of `logoSVG()` with the slogan rendered as SVG `<text>` rather than an HTML span
+- A "← Home" link and "Save as PDF" button are in a fixed `.print-bar` that is hidden on print
+
+When editing the logo or slogan, update **both** `components.js` and `course-brochure.html`.
+
+### Razorpay Payment
+
+Enrollment payment goes to `https://pages.razorpay.com/campustoai-enrolment`. This URL appears in `enroll.html` (two buttons). Fee is ₹49,999 all-inclusive, GST included.
+
 ## Deployment
 
 Hosted on GitHub Pages. The [CNAME](CNAME) file maps to `www.campustoai.com`. Pushing to the repository deploys automatically.
