@@ -160,6 +160,22 @@ p  { color: #374151; }
   transition: background .2s;
 }
 .top-bar-wa:hover { background: #1ebe5a; }
+
+.top-bar-ig {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity .2s;
+}
+.top-bar-ig:hover { opacity: .85; }
 @media (max-width: 600px) {
   .top-bar-text { display: none; }
   .top-bar-inner { justify-content: center; }
@@ -1228,6 +1244,20 @@ details.faq-item[open] .faq-icon {
   transition: background var(--transition);
 }
 .wa-link:hover { background: #1ebe5a; }
+
+.ig-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: var(--white);
+  padding: 9px 16px;
+  border-radius: 7px;
+  font-size: .85rem;
+  font-weight: 600;
+  transition: opacity var(--transition);
+}
+.ig-link:hover { opacity: .85; }
 
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,.12);
